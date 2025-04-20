@@ -77,6 +77,25 @@
     overflow-x: hidden;
 }
 
+.list-content {
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #f7f7f7;
+    height: 85%;
+    width: 340px;
+    overflow-x: hidden;
+}
+.list-content .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - 2px);
+    width: 338px;
+    overflow-x: hidden;
+    transition: left 0.2s ease;
+}
+
 .conli {
     display: flex;
     width: 100%;
@@ -148,7 +167,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #7b83f5;
-    transition: left 0.2s ease;
+    transition: left 0.4s ease;
 }
 
 .toggle {
@@ -171,4 +190,14 @@
     border: none;
     background-color: #fff;
     height: 1px;
+}
+
+
+.tab-btn {
+    border: 1px #d3d3d3 solid;
+    border-bottom: 1px #f7f7f7 solid;
+    background-color: #f7f7f7;
+    margin: 0;
+    font-size: 17px;
+    font: bolder;
 }

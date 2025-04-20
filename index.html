@@ -142,9 +142,7 @@
                 <br>
                 想做贡献？
                 <a href="https://vika.cn/share/shritrQpZD8rkgiuW6Q4z">点击这里登记您的ScrOS</a>
-                <div style="position: fixed; bottom: 15px; right: 0; background-color: #dbdbdb; font-size: 13px;">
-                    © 2025 Maybesoft. all rights reserved.
-                </div>
+
                 <br><br>
                 在这上面留下您的国旗:
                 <br><br>
@@ -163,17 +161,17 @@
             </div>
         </div>
 
-        <div class="list">
-            <h2><span class="material-symbols-outlined">leaderboard</span> OS排行榜</h2>
-            <div class="content" id="oslist">
-                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
-            </div>
-        </div>
-
-        <div class="list">
-            <h2><span class="material-symbols-outlined">leaderboard</span> UI排行榜</h2>
-            <div class="content" id="uilist">
-                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+        <div class="list" style="width: 340px;">
+            <span class="material-symbols-outlined">leaderboard</span>
+            <button class="tab-btn" onclick="changeto('oslist')" id="osbtn">OS排行榜</button>
+            <button class="tab-btn" onclick="changeto('uilist')" id="uibtn">UI排行榜</button>
+            <div class="list-content">
+                <div class="content" id="oslist">
+                    <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+                </div>
+                <div class="content" id="uilist">
+                    <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+                </div>
             </div>
         </div>
 
@@ -188,6 +186,10 @@
     </div>
 
     <script src="file/script/script.js"></script>
+
+    <div style="position: fixed; bottom: 15px; right: 0; background-color: #dbdbdb; font-size: 13px;">
+        © 2025 Maybesoft. all rights reserved.
+    </div>
 
 </body>
 

@@ -343,6 +343,35 @@ function togglenews_sidebar(id) {
 
 function stringToHex(str) {
     return Array.from(new TextEncoder().encode(str))
-      .map(byte => byte.toString(16).padStart(2, '0'))
-      .join('');
-  }
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+}
+
+window.onload = changeto("oslist");
+
+function changeto(id) {
+    if (id == 'oslist') {
+        let oslist = document.getElementById('oslist');
+        let uilist = document.getElementById('uilist');
+        oslist.style.left = "0px";
+        uilist.style.left = "338px";
+        let uibtn = document.getElementById('uibtn');
+        uibtn.style.backgroundColor = "#d8d7d7";
+        uibtn.style.fontSize = "16px";
+        let osbtn = document.getElementById('osbtn');
+        osbtn.style.backgroundColor = "#f7f7f7";
+        osbtn.style.fontSize = "17px";
+
+    } else if (id == 'uilist') {
+        let oslist = document.getElementById('oslist');
+        let uilist = document.getElementById('uilist');
+        oslist.style.left = "-338px";
+        uilist.style.left = "0px";
+        let uibtn = document.getElementById('uibtn');
+        uibtn.style.backgroundColor = "#f7f7f7";
+        uibtn.style.fontSize = "17px";
+        let osbtn = document.getElementById('osbtn');
+        osbtn.style.backgroundColor = "#d8d7d7";
+        osbtn.style.fontSize = "16px";
+    }
+}
