@@ -32,6 +32,7 @@ const CONFIG = {
         news: '#newslist',
         projects: '#osprojectlist',
         projects_sidebar: '#sidebardownlayer',
+        news_sidebar: '#newssidebardownlayer',
         rankOS: '#oslist',
         rankUI: '#uilist'
     },
@@ -140,10 +141,10 @@ const dataLoader = {
                 .map((item, index) => {
                     const rank = index < 3 ? CONFIG.rankConfig[index] : null;
                     return `
-              <div class="${rank ? rank.class : 'nbn'}">
+              <div class="${rank ? rank.class : 'nbn'}" onclick="toggleproject_sidebar('${stringToHex(utils.escapeHtml(item.fields[titleField]))}scros${stringToHex(utils.escapeHtml(item.fields[authorField]))}');">
                 <span>
                   ${rank ? rank.icon + ' ' : ''}
-                  ${utils.escapeHtml(item.fields[titleField])} - ${utils.escapeHtml(item.fields[authorField])}
+                  ${utils.escapeHtml(item.fields[titleField])} - ${utils.escapeHtml(item.fields[authorField])} 分:${utils.escapeHtml(item.fields[scoreField])}
                 </span>
               </div>
             `;
@@ -192,7 +193,7 @@ const init = () => {
             time: '时间'
         },
         template: fields => `
-        <div class="conli">
+        <div class="conli" onclick="togglenews_sidebar('${stringToHex(fields.title)}news${stringToHex(fields.time)}');">
           <div class="content-div">
             <span class="title">${fields.title}</span>
             <br>
@@ -202,6 +203,26 @@ const init = () => {
           </div>
         </div>
       `
+    });
+
+    // 加载新闻列表
+    dataLoader.loadList({
+        url: CONFIG.apis.news,
+        containerId: CONFIG.containers.news_sidebar,
+        fieldsMap: {
+            title: '标题',
+            content: '内容',
+            time: '时间'
+        },
+        template: fields => `
+        <div class="scros-detalmsg-sidebar" id="${stringToHex(fields.title)}news${stringToHex(fields.time)}">
+            <button class="toggle" onclick="togglenews_sidebar('${stringToHex(fields.title)}news${stringToHex(fields.time)}');"><</button>
+            <h1 class="title" style="font-size: 3rem; color: #fafafa;"> <span class="material-symbols-outlined" style="font-size: 3rem; color: #fafafa;">newspaper</span> ${fields.title}</h1>
+            <span class="author" style="color: #fafafa;">${fields.time}</span>
+            <hr class="hr-sidebar">
+            <span class="author" style="color: #fafafa;">${fields.content}</span>
+        <hr class="hr-sidebar">
+          `
     });
 
     // 加载项目列表（主内容区域）
@@ -215,7 +236,7 @@ const init = () => {
             size: '体积'
         },
         template: fields => `
-        <div class="conli" onclick="toggleproject_sidebar('${fields.title}');">
+        <div class="conli" onclick="toggleproject_sidebar('${stringToHex(fields.title)}scros${stringToHex(fields.author)}');">
           <div class="image-div">
             <img class="image" src="file/img/tab-logo.png">
           </div>
@@ -244,8 +265,8 @@ const init = () => {
             files: '附件'
         },
         template: fields => `
-        <div class="scros-detalmsg-sidebar" id="${fields.title}">
-            <button class="toggle" onclick="toggleproject_sidebar('${fields.title}');"><</button>
+        <div class="scros-detalmsg-sidebar" id="${stringToHex(fields.title)}scros${stringToHex(fields.author)}">
+            <button class="toggle" onclick="toggleproject_sidebar('${stringToHex(fields.title)}scros${stringToHex(fields.author)}');"><</button>
             <h1 class="title" style="font-size: 3rem; color: #fafafa;"> <span class="material-symbols-outlined" style="font-size: 3rem; color: #fafafa;">desktop_windows</span> ${fields.title}</h1>
             <span class="author" style="color: #fafafa;">作者：${fields.author}</span>
         <hr class="hr-sidebar">
@@ -300,3 +321,28 @@ function toggleproject_sidebar(id) {
         }
     }
 }
+
+function togglenews_sidebar(id) {
+    if (document.getElementById(id)) {
+        var sidebardownlayer = document.getElementById('newssidebardownlayer');
+        if (sidebardownlayer.style.backgroundColor === "rgba(0, 0, 0, 0.5)") {
+            sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0)";
+            sidebardownlayer.style.pointerEvents = "none";
+        } else {
+            sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+            sidebardownlayer.style.pointerEvents = "auto";
+        }
+        var sidebar = document.getElementById(id);
+        if (sidebar.style.left === "0px") {
+            sidebar.style.left = "-360px";
+        } else {
+            sidebar.style.left = "0px";
+        }
+    }
+}
+
+function stringToHex(str) {
+    return Array.from(new TextEncoder().encode(str))
+      .map(byte => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
