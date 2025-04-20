@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="file/img/tab-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="file/style/style.css">
+    <link rel="stylesheet" href="file/style/list_nb.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <title>ScrOS, Iseeyou</title>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .content::-webkit-scrollbar-track, .scros-detalmsg-sidebar::-webkit-scrollbar-track {
+        background-color: #f0f0f0;
+    }
+
+    .content::-webkit-scrollbar, .scros-detalmsg-sidebar::-webkit-scrollbar {    
+        width: 14px;
+        background-color: #cecece;
+    }
+
+    .content::-webkit-scrollbar-thumb, .scros-detalmsg-sidebar::-webkit-scrollbar-thumb {
+        background-color: #d1d1d1;
+    }
+
+    .content::-webkit-scrollbar-thumb:active, .scros-detalmsg-sidebar::-webkit-scrollbar-thumb:active {    
+        background-color: #a7a7a7;
+    }
+
+    /* 设置滚动条向上按钮的样式 */
+    .content::-webkit-scrollbar-button:vertical:decrement, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:decrement {
+        background-image: url('file/img/scrollbar/scrollbar_button_up.png');
+    }
+    .content::-webkit-scrollbar-button:vertical:decrement:hover, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:decrement:hover {
+        background-image: url('file/img/scrollbar/scrollbar_button_up_hover.png');
+    }
+    .content::-webkit-scrollbar-button:vertical:decrement:active, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:decrement:active {
+        background-image: url('file/img/scrollbar/scrollbar_button_up_active.png');
+    }
+
+    /* 设置滚动条向下按钮的样式 */
+    .content::-webkit-scrollbar-button:vertical:increment, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:increment {
+        background-image: url('file/img/scrollbar/scrollbar_button_down.png');
+    }
+    .content::-webkit-scrollbar-button:vertical:increment:hover, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:increment:hover {
+        background-image: url('file/img/scrollbar/scrollbar_button_down_hover.png');
+    }
+    .content::-webkit-scrollbar-button:vertical:increment:active, .scros-detalmsg-sidebar::-webkit-scrollbar-button:vertical:increment:active {
+        background-image: url('file/img/scrollbar/scrollbar_button_down_active.png');
+    }
+
+
+    .main::-webkit-scrollbar-track {
+        background-color: #f0f0f0;
+    }
+
+    .main::-webkit-scrollbar {    
+        width: 14px;
+        background-color: #cecece;
+    }
+
+    .main::-webkit-scrollbar-thumb {
+        background-color: #d1d1d1;
+    }
+
+    .main::-webkit-scrollbar-thumb:active {    
+        background-color: #a7a7a7;
+    }
+
+    /* 设置滚动条向上按钮的样式 */
+    .main::-webkit-scrollbar-button:single-button:horizontal:decrement {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_left.png');
+    }
+    .main::-webkit-scrollbar-button:single-button:horizontal:decrement:hover {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_left_hover.png');
+    }
+    .main::-webkit-scrollbar-button:single-button:horizontal:decrement:active {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_left_active.png');
+    }
+
+    /* 设置滚动条向下按钮的样式 */
+    .main::-webkit-scrollbar-button:single-button:horizontal:increment {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_right.png');
+    }
+    .main::-webkit-scrollbar-button:single-button:horizontal:increment:hover {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_right_hover.png');
+    }
+    .main::-webkit-scrollbar-button:single-button:horizontal:increment:active {
+        background-image: url('file/img/scrollbar-X/scrollbar_button_right_active.png');
+    }
+</style>
+
+<body>
+    <div class="topbar">
+        <img src="file/img/topbar-logo.png" alt="Logo" class="logo">
+        <h1 style="position: absolute; left: 50px; bottom: -16px;">欢迎到 ScrOS, Iseeyou</h1>
+    </div>
+
+    <div class="main">
+
+        <div class="list">
+            <h2><span class="material-symbols-outlined">star</span> 作品</h2>
+            <div class="content" id="osprojectlist">
+                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+            </div>
+        </div>
+
+        <div class="list">
+            <h2><span class="material-symbols-outlined">lightbulb</span> 你可能想知道</h2>
+            <div class="content">
+                按住 Shift 能够滚动，或者左右滑动
+                <br>
+                这是一个 ScrOS 作品展示网站，您可以在这里查看其他<br>人的作品，或者登记自己的作品。
+                <br>
+                这是一个非盈利性质的网站，所有的作品都来自于各个<br>用户。
+                <br>
+                想做贡献？
+                <a href="https://vika.cn/share/shritrQpZD8rkgiuW6Q4z">点击这里登记您的ScrOS</a>
+                <div style="position: fixed; bottom: 15px; right: 0; background-color: #dbdbdb; font-size: 13px;">
+                © 2025 Maybesoft. all rights reserved.
+                </div>
+            </div>
+        </div>
+
+        <div class="list">
+            <h2><span class="material-symbols-outlined">newspaper</span> 新闻</h2>
+            <div class="content" id="newslist">
+                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+            </div>
+        </div>
+
+        <div class="list">
+            <h2><span class="material-symbols-outlined">leaderboard</span> OS排行榜</h2>
+            <div class="content" id="oslist">
+                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+            </div>
+        </div>
+
+        <div class="list">
+            <h2><span class="material-symbols-outlined">leaderboard</span> UI排行榜</h2>
+            <div class="content" id="uilist">
+                <h1 style="margin-left: 30px; margin-right: 30px;">正在加载...</h1>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="scros-detalmsg-sidebar-downlayer" id="sidebardownlayer">
+
+    </div>
+
+    <script src="file/script/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #719bdb;
+    color: #ffffff;
+    padding: 10px;
+    transform: translate(0, 0);
+    overflow: hidden;
+}
+.topbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            #ffffff5d,
+            transparent);
+    transition: none;
+    opacity: 0;
+}
+
+.topbar:before {
+    opacity: 1;
+    animation: topbarframes 7s infinite;
+}
+
+@keyframes topbarframes {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.logo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    float: left;
+    height: 70px;
+}
+
+.main {
+    white-space: nowrap;
+    z-index: -1;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    height: calc(100% - 60px);
+    width: calc(100% - 11px);
+    padding: 5px;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.list {
+    display: inline-block;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 100%;
+    width: auto;
+}
+
+.content {
+    border: 1px #d3d3d3 solid;
+    background-color: #f7f7f7;
+    height: 85%;
+    overflow-x: hidden;
+}
+
+.conli {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    padding-right:2px;
+    transition: background-color 0.1s;
+}
+
+.conli:hover {
+    text-decoration: underline;
+    background-color: #f0f0f0;
+}
+
+.conli:active {
+    background-color: #9bd2ec;
+}
+
+.conli .image-div {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+}
+
+.conli .image-div .image {
+    height: 1px;
+}
+
+.conli .content-div {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 5px;
+    min-height: 100%;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+}
+
+
+.scros-detalmsg-sidebar-downlayer {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000000;
+    pointer-events: none;
+    transition: background-color 0.2s ease;
+}
+
+.scros-detalmsg-sidebar {
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    left: -360px;
+    width: 350px;
+    height: calc(100% - 10px);
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #7b83f5;
+    transition: left 0.2s ease;
+}
+
+.toggle {
+    color: #fafafa;
+    background-color: #7b83f5;
+    border: 2px #fafafa solid;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    font-size: 1.5rem;
+}
+.toggle:hover {
+    background-color: #b4b8f3;
+}
+.toggle:active {
+    background-color: #f0f0f0;
+}
+
+.hr-sidebar {
+    border: none;
+    background-color: #fff;
+    height: 1px;
+}

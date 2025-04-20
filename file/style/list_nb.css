@@ -1,0 +1,77 @@
+.list .nb1 {
+    width: 100%;
+    padding: 5px;
+    background-color: #ebd833;
+    color: #fff;
+    text-shadow: 0 0 4px #fff;
+    transition: background-color 0.2s, text-shadow 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    transform: translate(0, 0);
+}
+
+.list .nb1:hover {
+    background-color: #f0de3c;
+    text-shadow: 0 0 9px #fff;
+    box-shadow: inset -5px 0 9px #fff;
+}
+
+.list .nb1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8),
+            transparent);
+    z-index: 1;
+    transition: none;
+    opacity: 0;
+}
+
+.list .nb1:before {
+    opacity: 1;
+    animation: slide 2s infinite;
+}
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.list .nb2 {
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(122, 233, 227);
+    color: #fff;
+    transition: background-color 0.2s;
+}
+.list .nb2:hover {
+    background-color: rgb(115, 243, 237);
+    text-shadow: 0 0 9px #fff;
+}
+
+.list .nb3 {
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(19, 211, 19);
+    color: #fff;
+    transition: background-color 0.2s;
+}
+.list .nb3:hover {
+    background-color: rgb(44, 230, 44);
+}
+
+.list .nbn {
+    padding-left: 90px;
+    width: 100%;
+    padding: 5px;
+    transition: background-color 0.2s;
+}
