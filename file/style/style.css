@@ -97,6 +97,7 @@
 }
 
 .conli {
+    cursor: pointer;
     display: flex;
     width: 100%;
     padding: 5px;
@@ -171,6 +172,7 @@
 }
 
 .toggle {
+    cursor: pointer;
     color: #fafafa;
     background-color: #7b83f5;
     border: 2px #fafafa solid;
@@ -194,10 +196,21 @@
 
 
 .tab-btn {
+    cursor: pointer;
     border: 1px #d3d3d3 solid;
     border-bottom: 1px #f7f7f7 solid;
     background-color: #f7f7f7;
     margin: 0;
     font-size: 17px;
+    font: bolder;
+}
+
+.tab-btn-unactive {
+    cursor: pointer;
+    border: 1px #d3d3d3 solid;
+    border-bottom: 1px #d8d7d7 solid;
+    background-color: #d8d7d7;
+    margin: 0;
+    font-size: 16px;
     font: bolder;
 }

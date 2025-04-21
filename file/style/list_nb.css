@@ -1,4 +1,5 @@
 .list .nb1 {
+    cursor: pointer;
     width: 100%;
     padding: 5px;
     background-color: #ebd833;
@@ -47,6 +48,7 @@
 }
 
 .list .nb2 {
+    cursor: pointer;
     width: 100%;
     padding: 5px;
     background-color: rgb(122, 233, 227);
@@ -59,6 +61,7 @@
 }
 
 .list .nb3 {
+    cursor: pointer;
     width: 100%;
     padding: 5px;
     background-color: rgb(19, 211, 19);
@@ -70,6 +73,7 @@
 }
 
 .list .nbn {
+    cursor: pointer;
     padding-left: 90px;
     width: 100%;
     padding: 5px;

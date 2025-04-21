@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 function toggleproject_sidebar(id) {
     if (document.getElementById(id)) {
-        var sidebardownlayer = document.getElementById('sidebardownlayer');
+        let sidebardownlayer = document.getElementById('sidebardownlayer');
         if (sidebardownlayer.style.backgroundColor === "rgba(0, 0, 0, 0.5)") {
             sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0)";
             sidebardownlayer.style.pointerEvents = "none";
@@ -313,7 +313,7 @@ function toggleproject_sidebar(id) {
             sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             sidebardownlayer.style.pointerEvents = "auto";
         }
-        var sidebar = document.getElementById(id);
+        let sidebar = document.getElementById(id);
         if (sidebar.style.left === "0px") {
             sidebar.style.left = "-360px";
         } else {
@@ -324,7 +324,7 @@ function toggleproject_sidebar(id) {
 
 function togglenews_sidebar(id) {
     if (document.getElementById(id)) {
-        var sidebardownlayer = document.getElementById('newssidebardownlayer');
+        let sidebardownlayer = document.getElementById('newssidebardownlayer');
         if (sidebardownlayer.style.backgroundColor === "rgba(0, 0, 0, 0.5)") {
             sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0)";
             sidebardownlayer.style.pointerEvents = "none";
@@ -332,7 +332,7 @@ function togglenews_sidebar(id) {
             sidebardownlayer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
             sidebardownlayer.style.pointerEvents = "auto";
         }
-        var sidebar = document.getElementById(id);
+        let sidebar = document.getElementById(id);
         if (sidebar.style.left === "0px") {
             sidebar.style.left = "-360px";
         } else {
@@ -356,11 +356,9 @@ function changeto(id) {
         oslist.style.left = "0px";
         uilist.style.left = "338px";
         let uibtn = document.getElementById('uibtn');
-        uibtn.style.backgroundColor = "#d8d7d7";
-        uibtn.style.fontSize = "16px";
+        uibtn.className = "tab-btn-unactive";
         let osbtn = document.getElementById('osbtn');
-        osbtn.style.backgroundColor = "#f7f7f7";
-        osbtn.style.fontSize = "17px";
+        osbtn.className = "tab-btn";
 
     } else if (id == 'uilist') {
         let oslist = document.getElementById('oslist');
@@ -368,10 +366,8 @@ function changeto(id) {
         oslist.style.left = "-338px";
         uilist.style.left = "0px";
         let uibtn = document.getElementById('uibtn');
-        uibtn.style.backgroundColor = "#f7f7f7";
-        uibtn.style.fontSize = "17px";
+        uibtn.className = "tab-btn";
         let osbtn = document.getElementById('osbtn');
-        osbtn.style.backgroundColor = "#d8d7d7";
-        osbtn.style.fontSize = "16px";
+        osbtn.className = "tab-btn-unactive";
     }
 }
