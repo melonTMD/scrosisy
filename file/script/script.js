@@ -354,7 +354,7 @@ function changeto(id) {
         let oslist = document.getElementById('oslist');
         let uilist = document.getElementById('uilist');
         oslist.style.left = "0px";
-        uilist.style.left = "338px";
+        uilist.style.left = "340px";
         let uibtn = document.getElementById('uibtn');
         uibtn.className = "tab-btn-unactive";
         let osbtn = document.getElementById('osbtn');
@@ -363,7 +363,7 @@ function changeto(id) {
     } else if (id == 'uilist') {
         let oslist = document.getElementById('oslist');
         let uilist = document.getElementById('uilist');
-        oslist.style.left = "-338px";
+        oslist.style.left = "-340px";
         uilist.style.left = "0px";
         let uibtn = document.getElementById('uibtn');
         uibtn.className = "tab-btn";

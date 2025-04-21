@@ -78,6 +78,7 @@
 }
 
 .list-content {
+    border: 1px #d3d3d3 solid;
     position: relative;
     top: 0;
     left: 0;
@@ -87,11 +88,12 @@
     overflow-x: hidden;
 }
 .list-content .content {
+    border: none;
     position: absolute;
     top: 0;
     left: 0;
     height: calc(100% - 2px);
-    width: 338px;
+    width: 340px;
     overflow-x: hidden;
     transition: left 0.2s ease;
 }
