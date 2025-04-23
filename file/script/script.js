@@ -1,4 +1,9 @@
+console.log(`Loading...`);
+
+function complete() {
 console.log(`
+All components loaded successfully!
+
 Welcome to
    _____                  ____     _____     
   / ____|                / __ \\   / ____|    
@@ -16,8 +21,22 @@ Welcome to
     \\/_____/ \\/___/  \\/____/ \\/____/  \`/___/> \\ \\/___/   \\/___/ 
                                          /\\___/                 
 © 2025 Maybesoft. all rights reserved.   \\/__/                  
-
 `);
+    let complete_menu = document.getElementById('main_menu');
+    complete_menu.className = "main complete";
+    let loading_menu = document.getElementById('loading');
+    loading_menu.style.display = "none";
+}
+
+function failed() {
+    console.log('Some components failed to load');
+    let loading_menu = document.getElementById('loading');
+    loading_menu.style.display = "none";
+    let load_failed = document.getElementById('load_failed');
+    load_failed.style.display = "block";
+    let topbar = document.getElementById('topbar');
+    topbar.style.backgroundColor = "#800000";
+}
 
 // 配置项统一管理
 let isimgconfig = false;
@@ -59,7 +78,7 @@ const utils = {
 
     // 统一错误处理
     showError: (error, containerId) => {
-        const container = document.querySelector(containerId);
+        const container = document.querySelector(sidebardownlayer);
         if (!container) return;
 
         const errorEl = utils.createEl('div', 'error-message', {
@@ -71,7 +90,7 @@ const utils = {
             borderRadius: '4px'
         });
 
-        errorEl.innerHTML = `<h3>加载失败</h3><p>${utils.escapeHtml(error.message)}</p>`;
+        errorEl.innerHTML = `<p>${utils.escapeHtml(error.message)}</p>`;
         container.innerHTML = '';
         container.appendChild(errorEl);
     },
@@ -114,10 +133,11 @@ const dataLoader = {
                     return template(fields);
                 })
                 .join('');
-
+            return true; // 成功时返回解析值
         } catch (error) {
             console.error(`加载失败: ${error}`);
             utils.showError(error, config.containerId);
+            throw error; // 抛出错误以触发Promise rejection
         }
     },
 
@@ -151,9 +171,11 @@ const dataLoader = {
                 })
                 .join('');
 
+            return true; // 成功时返回解析值
         } catch (error) {
             console.error(`加载失败: ${error}`);
             utils.showError(error, config.containerId);
+            throw error; // 抛出错误以触发Promise rejection
         }
     }
 };
@@ -183,16 +205,19 @@ const init = () => {
         subtree: true
     });
 
+    const loadPromises = [];
+
     // 加载新闻列表
-    dataLoader.loadList({
-        url: CONFIG.apis.news,
-        containerId: CONFIG.containers.news,
-        fieldsMap: {
-            title: '标题',
-            content: '内容',
-            time: '时间'
-        },
-        template: fields => `
+    loadPromises.push(
+        dataLoader.loadList({
+            url: CONFIG.apis.news,
+            containerId: CONFIG.containers.news,
+            fieldsMap: {
+                title: '标题',
+                content: '内容',
+                time: '时间'
+            },
+            template: fields => `
         <div class="conli" onclick="togglenews_sidebar('${stringToHex(fields.title)}news${stringToHex(fields.time)}');">
           <div class="content-div">
             <span class="title">${fields.title}</span>
@@ -203,18 +228,20 @@ const init = () => {
           </div>
         </div>
       `
-    });
+        })
+    );
 
     // 加载新闻列表
-    dataLoader.loadList({
-        url: CONFIG.apis.news,
-        containerId: CONFIG.containers.news_sidebar,
-        fieldsMap: {
-            title: '标题',
-            content: '内容',
-            time: '时间'
-        },
-        template: fields => `
+    loadPromises.push(
+        dataLoader.loadList({
+            url: CONFIG.apis.news,
+            containerId: CONFIG.containers.news_sidebar,
+            fieldsMap: {
+                title: '标题',
+                content: '内容',
+                time: '时间'
+            },
+            template: fields => `
         <div class="scros-detalmsg-sidebar" id="${stringToHex(fields.title)}news${stringToHex(fields.time)}">
             <button class="toggle" onclick="togglenews_sidebar('${stringToHex(fields.title)}news${stringToHex(fields.time)}');"><</button>
             <h1 class="title" style="font-size: 3rem; color: #fafafa;"> <span class="material-symbols-outlined" style="font-size: 3rem; color: #fafafa;">newspaper</span> ${fields.title}</h1>
@@ -223,19 +250,21 @@ const init = () => {
             <span class="author" style="color: #fafafa;">${fields.content}</span>
         <hr class="hr-sidebar">
           `
-    });
+        })
+    );
 
     // 加载项目列表（主内容区域）
-    dataLoader.loadList({
-        url: CONFIG.apis.projects,
-        containerId: CONFIG.containers.projects,
-        fieldsMap: {
-            title: '名称',
-            content: '介绍',
-            author: '作者',
-            size: '体积'
-        },
-        template: fields => `
+    loadPromises.push(
+        dataLoader.loadList({
+            url: CONFIG.apis.projects,
+            containerId: CONFIG.containers.projects,
+            fieldsMap: {
+                title: '名称',
+                content: '介绍',
+                author: '作者',
+                size: '体积'
+            },
+            template: fields => `
         <div class="conli" onclick="toggleproject_sidebar('${stringToHex(fields.title)}scros${stringToHex(fields.author)}');">
           <div class="image-div">
             <img class="image" src="file/img/tab-logo.png">
@@ -251,20 +280,22 @@ const init = () => {
           </div>
         </div>
         `
-    });
+        })
+    );
 
     // 加载侧边栏项目列表
-    dataLoader.loadList({
-        url: CONFIG.apis.projects,
-        containerId: CONFIG.containers.projects_sidebar,
-        fieldsMap: {
-            title: '名称',
-            content: '介绍',
-            author: '作者',
-            size: '体积',
-            files: '附件'
-        },
-        template: fields => `
+    loadPromises.push(
+        dataLoader.loadList({
+            url: CONFIG.apis.projects,
+            containerId: CONFIG.containers.projects_sidebar,
+            fieldsMap: {
+                title: '名称',
+                content: '介绍',
+                author: '作者',
+                size: '体积',
+                files: '附件'
+            },
+            template: fields => `
         <div class="scros-detalmsg-sidebar" id="${stringToHex(fields.title)}scros${stringToHex(fields.author)}">
             <button class="toggle" onclick="toggleproject_sidebar('${stringToHex(fields.title)}scros${stringToHex(fields.author)}');"><</button>
             <h1 class="title" style="font-size: 3rem; color: #fafafa;"> <span class="material-symbols-outlined" style="font-size: 3rem; color: #fafafa;">desktop_windows</span> ${fields.title}</h1>
@@ -275,28 +306,46 @@ const init = () => {
             <span class="author" style="color: #fafafa;">体积：${fields.size}</span>
         <hr class="hr-sidebar">
         <span style="color: #fafafa;">附件：${fields.files?.map(file =>
-            `<br><a href="${file.url}" target="_blank" download="${file.name}" style="color: #fafafa;">${file.name}</a>`
-        ).join('') || '无'
-            }</span>
+                `<br><a href="${file.url}" target="_blank" download="${file.name}" style="color: #fafafa;">${file.name}</a>`
+            ).join('') || '无'
+                }</span>
         </div>
         `
-    });
+        })
+    );
 
     // 加载排行榜
-    dataLoader.loadRanking({
-        url: CONFIG.apis.rankOS,
-        containerId: CONFIG.containers.rankOS,
-        titleField: '名字',
-        authorField: '作者',
-        scoreField: '总分'
-    });
+    loadPromises.push(
+        dataLoader.loadRanking({
+            url: CONFIG.apis.rankOS,
+            containerId: CONFIG.containers.rankOS,
+            titleField: '名字',
+            authorField: '作者',
+            scoreField: '总分'
+        })
+    );
 
-    dataLoader.loadRanking({
-        url: CONFIG.apis.rankUI,
-        containerId: CONFIG.containers.rankUI,
-        titleField: '名字',
-        authorField: '作者',
-        scoreField: '总分'
+    loadPromises.push(
+        dataLoader.loadRanking({
+            url: CONFIG.apis.rankUI,
+            containerId: CONFIG.containers.rankUI,
+            titleField: '名字',
+            authorField: '作者',
+            scoreField: '总分'
+        })
+    );
+
+    // 使用Promise.allSettled等待所有加载结果
+    Promise.allSettled(loadPromises).then(results => {
+        const hasErrors = results.some(result =>
+            result.status === 'rejected'
+        );
+
+        if (hasErrors) {
+            failed();
+        } else {
+            complete();
+        }
     });
 };
 
